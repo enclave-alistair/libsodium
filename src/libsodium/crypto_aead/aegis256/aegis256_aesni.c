@@ -18,9 +18,9 @@
 #include "aegis256_aesni.h"
 
 #ifdef __clang__
-#pragma clang attribute push(__attribute__((target("aes"))), apply_to = function)
+#pragma clang attribute push(__attribute__((target("aes,avx"))), apply_to = function)
 #elif defined(__GNUC__)
-#pragma GCC target("aes")
+#pragma GCC target("aes,avx")
 #endif
 
 #include "private/sse2_64_32.h"

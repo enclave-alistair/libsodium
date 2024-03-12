@@ -15,7 +15,7 @@
 #include "aegis256_armcrypto.h"
 #endif
 
-#if defined(HAVE_WMMINTRIN_H)
+#if defined(HAVE_AVXINTRIN_H) && defined(HAVE_WMMINTRIN_H)
 #include "aegis256_aesni.h"
 #endif
 
@@ -148,8 +148,8 @@ _crypto_aead_aegis256_pick_best_implementation(void)
     }
 #endif
 
-#if defined(HAVE_WMMINTRIN_H)
-    if (sodium_runtime_has_aesni()) {
+#if defined(HAVE_AVXINTRIN_H) && defined(HAVE_WMMINTRIN_H)
+    if (sodium_runtime_has_aesni() & sodium_runtime_has_avx()) {
         implementation = &aegis256_aesni_implementation;
         return 0;
     }
